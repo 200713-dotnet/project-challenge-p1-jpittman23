@@ -1,0 +1,46 @@
+@model PizzaStore.Domain.Models.PizzaModel
+
+@{
+    ViewData["Title"]= "Pizza Details";
+}
+
+<h2>Pizza Details</h2>
+<hr />
+
+<p>
+    <a asp-action="AllPizzas">Back to List</a>
+</p>
+
+<div class="thumbnail">
+    <img alt="@Model.Name" src="@Model.Image" height="800" width="800" class="img-responsive" >
+    <div class="caption-full">
+        <h2 class="pull-right">@Model.Price.ToString("c")</h2>
+        <h2>
+            <a href="">@Model.Name</a>
+        </h2>
+        <div>
+        <p>@Model.Description</p>
+        <p>
+            <h4><b>List of Ingredients:</b></h4>
+
+            @if (ViewBag.PizzaIngredients.Count > 0)
+        {
+                @foreach (var ing in ViewBag.PizzaIngredients)
+            {
+                    <div> @ing </div>
+                }
+            }
+            else
+            {
+                <div>No @Html.DisplayNameFor(Model => Model.PizzaToppings) was found. </div>
+            }
+        </p>
+        </div>
+
+        <br />
+        <p class="button">
+            <a class="btn btn-primary" asp-controller="Cart" asp-action="AddToShoppingCart"
+                asp-route-pizzaId="@Model.Id">Add Pizza</a>
+        </p>
+    </div>
+</div>

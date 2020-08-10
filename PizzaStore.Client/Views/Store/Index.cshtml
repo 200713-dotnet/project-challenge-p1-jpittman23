@@ -1,0 +1,11 @@
+
+@{
+    ViewData["Title"] = "Admin Page";
+}
+
+<h2>Admin Page</h2>
+
+<h3><a asp-controller="Pizza" asp-action="Index">Pizzas</a></h3>
+<h3><a asp-controller="Orders" asp-action="Index">Orders</a></h3>
+<h3><a asp-controller="Store" asp-action="SeedDatabaseAsync">Seed Database</a></h3>
+<h3><a asp-controller="Store" asp-action="ClearDatabaseAsync">Clear Database</a></h3>

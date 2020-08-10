@@ -1,0 +1,54 @@
+@model PizzaStore.Domain.Models.OrderModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h2>Are you sure you want to delete?</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="OrderId" />
+        <dt>
+            @Html.DisplayNameFor(model => model.FName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PlaceTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PlaceTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OTotal)
+        </dt>
+        <dd>
+            @Model.OTotal.ToString("c")
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>
