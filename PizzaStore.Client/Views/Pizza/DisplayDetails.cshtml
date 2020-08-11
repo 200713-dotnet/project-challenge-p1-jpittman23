@@ -23,9 +23,9 @@
         <p>
             <h4><b>List of Ingredients:</b></h4>
 
-            @if (ViewBag.PizzaIngredients.Count > 0)
+            @if (ViewBag.PizzaToppings.Count > 0)
         {
-                @foreach (var ing in ViewBag.PizzaIngredients)
+                @foreach (var ing in ViewBag.PizzaToppings)
             {
                     <div> @ing </div>
                 }
@@ -39,7 +39,7 @@
 
         <br />
         <p class="button">
-            <a class="btn btn-primary" asp-controller="Cart" asp-action="AddToShoppingCart"
+            <a class="btn btn-primary" asp-controller="Cart" asp-action="AddToCart"
                 asp-route-pizzaId="@Model.Id">Add Pizza</a>
         </p>
     </div>

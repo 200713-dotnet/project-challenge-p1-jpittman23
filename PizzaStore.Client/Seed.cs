@@ -16,17 +16,14 @@ namespace PizzaStore.Client
         {
             DBContext.Database.EnsureCreated();
 
-            var mnger = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var User = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
-
             if (DBContext.Pizza.Any())
             {
                 return;
             }
 
             ClearDatabase(DBContext);
-            CreateAdminRole(DBContext, mnger, User);
-            SeedDB(DBContext, mnger, User);
+            // CreateAdminRole(DBContext);
+            SeedDB(DBContext);
         }
         private static void CreateAdminRole(PizzaStoreDBContext DBContext, RoleManager<IdentityRole> _mnger, UserManager<IdentityUser> _User)
         {
@@ -57,7 +54,7 @@ namespace PizzaStore.Client
             }
         }
 
-        private static void SeedDB(PizzaStoreDBContext DBContext, RoleManager<IdentityRole> _mnger, UserManager<IdentityUser> _User)
+        private static void SeedDB(PizzaStoreDBContext DBContext)
         {
             var Pizza1 = new PizzaModel { Name = "Cheese", crust = new CrustModel() { Name = "Regular" }, size = new SizeModel() { Name = "Medium" }, Price = 10.00M, Description= "Signature Cheese Pizza with our secret 2 blend cheese", Image = "http://placecorgi.com/250" };
             var Pizza2 = new PizzaModel { Name = "Pepperoni", crust = new CrustModel() { Name = "Regular" }, size = new SizeModel() { Name = "Medium" }, Price = 10.00M, Description= "Peppernoi Pizza with our secret All natural pepperoni", Image = "http://placecorgi.com/250"  };

@@ -38,13 +38,15 @@ namespace PizzaStore.Client
             //     .AddEntityFrameworkStores<PizzaStoreDBContext>()
             //     .AddDefaultTokenProviders();
             
-            services.AddScoped(sp => CartViewModel.GetCart(sp));
+
 
             services.AddTransient<IOrderRepo,OrderRepo>();
             services.AddTransient<PizzaRepo>();
             services.AddTransient<IStoreRepo,StoreRepo>();
-            services.AddMvc();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => CartViewModel.GetCart(sp)); 
+            services.AddMvc();                       
             services.AddMemoryCache();
             services.AddSession();
 
@@ -100,6 +102,7 @@ namespace PizzaStore.Client
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 

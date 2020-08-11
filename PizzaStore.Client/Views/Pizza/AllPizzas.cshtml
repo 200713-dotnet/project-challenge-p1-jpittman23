@@ -1,4 +1,4 @@
-@model PizzaViewModel
+@model PizzaStore.Client.Models.PizzaViewModel
 
 @{
     ViewData["Title"] = "Pizzas Menu";
@@ -20,7 +20,7 @@
 <hr />
 
 <div id="PizzaDesc">
-    @foreach (var pizza in Model.PizzaList)
+    @foreach (var pizza in @Model.PizzaList)
     {
         @Html.Partial("PizzaDesc", pizza)
     }

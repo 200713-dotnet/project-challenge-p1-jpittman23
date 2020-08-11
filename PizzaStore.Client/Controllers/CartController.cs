@@ -37,7 +37,7 @@ namespace PizzaStore.Client.Controllers
             return View(ItemModel);
         }
 
-        public async Task<IActionResult> AddToShoppingCart(int pizzaId)
+        public async Task<IActionResult> AddToCart(int pizzaId)
         {
             var selectedPizza = await _pizzaRepo.GetByIdAsync(pizzaId);
 

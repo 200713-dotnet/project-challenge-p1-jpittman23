@@ -72,15 +72,15 @@ namespace PizzaStore.Client.Controllers
 
             var pizzas = await _pizzaRepo.GetByIdIncludedAsync(id);
 
-            var listOfIngredients = await _DBContext.PizzaToppings.Where(x => x.PizzaId == id).Select(x => x.Topping.Name).ToListAsync();
-            ViewBag.PizzaToppings = listOfIngredients;
+            var PizzaToppings = await _DBContext.PizzaToppings.Where(x => x.PizzaId == id).Select(x => x.Topping.Name).ToListAsync();
+            ViewBag.PizzaToppings = PizzaToppings;
 
             if (pizzas == null)
             {
                 return NotFound();
             }
 
-            return View(pizzas);
+            return View();
         }
 
         // GET: Pizzas

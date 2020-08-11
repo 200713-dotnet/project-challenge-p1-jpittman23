@@ -21,11 +21,12 @@ namespace PizzaStore.Client.Controllers
         private readonly OrderRepo _orderRepo;
         private readonly CartViewModel _cart;
         private readonly UserManager<IdentityUser> _userMnger;
-        public OrderController(PizzaStoreDBContext dbContext, OrderRepo orderRepo, CartViewModel cart)
+        public OrderController(PizzaStoreDBContext dbContext, OrderRepo orderRepo, CartViewModel cart,UserManager<IdentityUser> userMnger)
         {
             _context = dbContext;
             _orderRepo = orderRepo;
             _cart = cart;
+            _userMnger = userMnger;
         }
         public IActionResult Checkout()
         {
@@ -73,7 +74,7 @@ namespace PizzaStore.Client.Controllers
                 return View(orders);
             }
         }
-        public async Task<IActionResult> details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == 0)
             {

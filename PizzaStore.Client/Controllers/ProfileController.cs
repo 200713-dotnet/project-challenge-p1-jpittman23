@@ -54,7 +54,7 @@ namespace PizzaStore.Client.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult LLogin(string returnUrl)
+        public IActionResult Login(string returnUrl)
         {
             return View(new LoginViewModel
             {

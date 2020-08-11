@@ -12,7 +12,7 @@ namespace PizzaStore.Client.Models
 {
     public class CartViewModel
     {
-        public string CartIdentity { get; set; }
+        public string CartId { get; set; }
         public List<CartModel> cart { get; set; }
         private readonly PizzaStoreDBContext _DBContext;
         public CartViewModel(PizzaStoreDBContext DBContext)
@@ -22,26 +22,26 @@ namespace PizzaStore.Client.Models
 
         public static CartViewModel GetCart(IServiceProvider services)
         {
-            ISession session = services.GetRequiredService<IHttpContextAccessor>().HttpContext.Session;
-
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?
+                .HttpContext.Session;
             var context = services.GetService<PizzaStoreDBContext>();
-            string cartId = session.GetString("CartId");
+            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
 
             session.SetString("CartId", cartId);
 
-            return new CartViewModel(context) { CartIdentity = cartId };
+            return new CartViewModel(context) { CartId = cartId };
         }
         public async Task AddToCartAsync(PizzaModel pizza, int amount)
         {
             var CartItem =
                     await _DBContext.cart.SingleOrDefaultAsync(
-                        p => p.Pizzas.Id == pizza.Id && p.Cartitem == CartIdentity);
+                        p => p.Pizzas.Id == pizza.Id && p.Cartitem == CartId);
 
             if (CartItem == null)
             {
                 CartItem = new CartModel
                 {
-                    Cartitem = CartIdentity,
+                    Cartitem = CartId,
                     Pizzas = pizza,
                     Total = 1
                 };
@@ -60,7 +60,7 @@ namespace PizzaStore.Client.Models
         {
             var CartItem =
                     await _DBContext.cart.SingleOrDefaultAsync(
-                        s => s.Pizzas.Id == pizza.Id && s.Cartitem == CartIdentity);
+                        s => s.Pizzas.Id == pizza.Id && s.Cartitem == CartId);
 
             var localAmount = 0;
 
@@ -81,12 +81,11 @@ namespace PizzaStore.Client.Models
 
             return localAmount;
         }
-
         public async Task<List<CartModel>> GetCartItemAsync()
         {
             return cart ??
                    (cart = await
-                       _DBContext.cart.Where(c => c.Cartitem == CartIdentity)
+                       _DBContext.cart.Where(c => c.Cartitem == CartId)
                            .Include(p => p.Pizzas)
                            .ToListAsync());
         }
@@ -95,7 +94,7 @@ namespace PizzaStore.Client.Models
         {
             var cartItems = _DBContext
                 .cart
-                .Where(cart => cart.Cartitem == CartIdentity);
+                .Where(cart => cart.Cartitem == CartId);
 
             _DBContext.cart.RemoveRange(cartItems);
 
@@ -104,7 +103,7 @@ namespace PizzaStore.Client.Models
 
         public decimal GetCartTotal()
         {
-            var total = _DBContext.cart.Where(c => c.Cartitem == CartIdentity)
+            var total = _DBContext.cart.Where(c => c.Cartitem == CartId)
                 .Select(c => c.Pizzas.Price * c.Total).Sum();
             return total;
         }
