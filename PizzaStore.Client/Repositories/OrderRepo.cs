@@ -33,6 +33,7 @@ namespace PizzaStore.Client.Repositories
                     Order = order,
                 };
 
+
                 OTotal += odetail.Cost * odetail.Total;
                 _DBContext.Odetail.Add(odetail);
             };

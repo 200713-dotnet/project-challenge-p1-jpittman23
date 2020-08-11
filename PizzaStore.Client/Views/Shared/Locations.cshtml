@@ -1,0 +1,14 @@
+@model PizzaStore.Domain.Models.StoreModel
+
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <div class="caption">
+            <p>@Model.Description</p>
+        </div>
+        <div class="SelectStore">
+            <p class="button">
+                <a class="btn btn-primary" asp-controller="Store" asp-action="Location" asp-route-pizzaId="@Model.Id">Add Pizza</a>
+            </p>
+        </div>
+    </div>
+</div>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using PizzaStore.Storing;
 using PizzaStore.Client.Repositories;
+using PizzaStore.Client.Models;
 
 namespace PizzaStore.Client.Controllers
 {
@@ -14,10 +15,14 @@ namespace PizzaStore.Client.Controllers
     {
         private readonly PizzaStoreDBContext _DBContext;
         private readonly IStoreRepo _StoreRepo;
+        private readonly LocationsRepo _LocationRepo;
+        private readonly StoreViewModel _store;
 
-        public StoreController(PizzaStoreDBContext DBContext, IStoreRepo StoreRepo)
+        public StoreController(StoreViewModel store, PizzaStoreDBContext DBContext, IStoreRepo StoreRepo,LocationsRepo LocationRepo)
         {
             _DBContext = DBContext;
+            _store = store;
+            _LocationRepo = LocationRepo;
             _StoreRepo = StoreRepo;
         }
 
@@ -29,6 +34,21 @@ namespace PizzaStore.Client.Controllers
         {
             _StoreRepo.ClearDatabase();
             return RedirectToAction("Index", "Pizzas", null);
+        }
+
+        public async Task<IActionResult> SelectStore()
+        {
+            var model = new StoreViewModel()
+            {
+                StoreList = await _LocationRepo.GetAllIncludedAsync()
+            };
+            return View(model);
+        }
+
+        public async Task<IActionResult> Location(int pizzaId)
+        {
+            var selectedStore = await _LocationRepo.GetByIdAsync(pizzaId);
+            return RedirectToAction("Index");
         }
 
         public IActionResult SeedDatabaseAsync()

@@ -56,6 +56,14 @@ namespace PizzaStore.Client
 
         private static void SeedDB(PizzaStoreDBContext DBContext)
         {
+            var Store1 = new StoreModel { Name = "The Pizza Store", Description = "123 West-Sdie St"};
+            var Store2 = new StoreModel { Name = "The Pizza Store", Description = "123 Easat-Side St" };
+
+            var Stores = new List<StoreModel>()
+            {
+                Store1, Store2
+            };
+
             var Pizza1 = new PizzaModel { Name = "Cheese", crust = new CrustModel() { Name = "Regular" }, size = new SizeModel() { Name = "Medium" }, Price = 10.00M, Description= "Signature Cheese Pizza with our secret 2 blend cheese", Image = "http://placecorgi.com/250" };
             var Pizza2 = new PizzaModel { Name = "Pepperoni", crust = new CrustModel() { Name = "Regular" }, size = new SizeModel() { Name = "Medium" }, Price = 10.00M, Description= "Peppernoi Pizza with our secret All natural pepperoni", Image = "http://placecorgi.com/250"  };
             var Pizza3 = new PizzaModel { Name = "Sausage", crust = new CrustModel() { Name = "Regular" }, size = new SizeModel() { Name = "Medium" }, Price = 10.00M,Description= "Sausage Pizza with spicy italian sausage", Image = "http://placecorgi.com/250"  };
@@ -114,6 +122,7 @@ namespace PizzaStore.Client
             DBContext.Toppings.AddRange(Toppings);
             DBContext.PizzaToppings.AddRange(pizzaFact);
             DBContext.Odetail.AddRange(Odetail);
+            DBContext.store.AddRange(Stores);
 
             DBContext.SaveChanges();
         }

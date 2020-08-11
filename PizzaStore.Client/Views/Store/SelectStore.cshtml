@@ -1,0 +1,28 @@
+@model PizzaStore.Client.Models.StoreViewModel
+
+@{
+    ViewData["Title"] = "Store's";
+}
+
+<h2>Locations</h2>
+
+<form asp-controller="Store" asp-action="SelectStore">
+    <div class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+</form>
+<h4>All Locations</h4>
+<hr />
+
+<div id="Locations">
+    @foreach (var store in @Model.StoreList)
+    {
+        @Html.Partial("Locations", store)
+    }
+</div>
+

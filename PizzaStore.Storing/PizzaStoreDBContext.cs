@@ -16,6 +16,7 @@ namespace PizzaStore.Storing
         public DbSet<PizzaFactory> PizzaToppings { get; set;}
         public DbSet<SizeModel> Size { get; set; }
         public DbSet<OrderModel> order { get; set; }
+        public DbSet<StoreModel> store { get; set; }
         public DbSet<ODetail> Odetail { get; set; }
         public DbSet<CartModel> cart { get; set; }
     }

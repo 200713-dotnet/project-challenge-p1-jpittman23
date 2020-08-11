@@ -37,10 +37,13 @@ namespace PizzaStore.Client.Controllers
         [HttpPost]
         public async Task<IActionResult> Checkout(OrderModel order)
         {
+            var userId = _userMnger.GetUserId(HttpContext.User);
+            order.UserId = userId;
+
             var products = await _cart.GetCartItemAsync();
             _cart.cart = products;
 
-            if (products.Count == 0)
+            if (_cart.cart.Count == 0)
             {
                 ModelState.AddModelError("", "Add Pizza First");
             }
