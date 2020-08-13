@@ -14,11 +14,11 @@ namespace PizzaStore.Client.Controllers
     public class StoreController : Controller
     {
         private readonly PizzaStoreDBContext _DBContext;
-        private readonly IStoreRepo _StoreRepo;
+        private readonly StoreRepo _StoreRepo;
         private readonly LocationsRepo _LocationRepo;
         private readonly StoreViewModel _store;
 
-        public StoreController(StoreViewModel store, PizzaStoreDBContext DBContext, IStoreRepo StoreRepo,LocationsRepo LocationRepo)
+        public StoreController(StoreViewModel store, PizzaStoreDBContext DBContext, StoreRepo StoreRepo,LocationsRepo LocationRepo)
         {
             _DBContext = DBContext;
             _store = store;

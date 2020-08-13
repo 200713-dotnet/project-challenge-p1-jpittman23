@@ -80,7 +80,7 @@ namespace PizzaStore.Client.Controllers
                 return NotFound();
             }
 
-            return View();
+            return View(pizzas);
         }
 
         // GET: Pizzas

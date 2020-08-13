@@ -34,15 +34,14 @@ namespace PizzaStore.Client
             services.AddControllersWithViews();
             services.AddDbContext<PizzaStoreDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PizzaStoreDBContext")));
 
-            // services.AddIdentity<IdentityUser, IdentityRole>()
-            //     .AddEntityFrameworkStores<PizzaStoreDBContext>()
+            // services.AddIdentity<ApplicationUser, IdentityRole>()
             //     .AddDefaultTokenProviders();
             
 
 
-            services.AddTransient<IOrderRepo,OrderRepo>();
+            services.AddTransient<OrderRepo>();
             services.AddTransient<PizzaRepo>();
-            services.AddTransient<IStoreRepo,StoreRepo>();
+            services.AddTransient<StoreRepo>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => CartViewModel.GetCart(sp)); 
@@ -67,20 +66,6 @@ namespace PizzaStore.Client
 
                 // User settings
                 options.User.RequireUniqueEmail = true;
-            });
-            services.ConfigureApplicationCookie(options =>
-            {
-                // Cookie settings
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                // If the LoginPath isn't set, ASP.NET Core defaults 
-                // the path to /Account/Login.
-                options.LoginPath = "/Account/Login";
-                options.LogoutPath = "/Account/LogOut";
-                // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
-                // the path to /Account/AccessDenied.
-                options.AccessDeniedPath = "/Account/AccessDenied";
-                options.SlidingExpiration = true;
             });
         }
 

@@ -7,6 +7,12 @@
 
   <ItemGroup>
 
+    <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
+
+    <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.3" />
+
+    <PackageReference Include="Microsoft.AspNet.Identity.OWIN" Version="2.2.3" />
+
     <PackageReference Include="microsoft.entityframeworkcore.Design" Version="3.1.6">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>

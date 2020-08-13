@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PizzaStore.Client.Repositories
 {
-    public class PizzaRepo
+    public class PizzaRepo : IPizzaRepo
     {
         private readonly PizzaStoreDBContext _DBContext;
 
